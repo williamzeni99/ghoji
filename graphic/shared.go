@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"syscall"
+
+	"golang.org/x/term"
 )
 
 func crawlFiles(path string) ([]string, error) {
@@ -37,4 +40,16 @@ func crawlFiles(path string) ([]string, error) {
 	}
 
 	return files, nil
+}
+
+func readPassword() (string, error) {
+	fmt.Print("Enter password: ")
+	bytePassword, err := term.ReadPassword(int(syscall.Stdin))
+	if err != nil {
+		return "", err
+	}
+	fmt.Printf("\n\n")
+	password := string(bytePassword)
+	return password, nil
+
 }

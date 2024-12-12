@@ -18,8 +18,7 @@ func DoEncryption(path string, numCpu int, chunks int, maxfiles int) {
 
 	var passwd string
 
-	fmt.Print("Insert password: ")
-	_, err = fmt.Scanf("%s", &passwd)
+	passwd, err = readPassword()
 	if err != nil {
 		panic(err)
 	}
